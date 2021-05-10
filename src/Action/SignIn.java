@@ -37,8 +37,8 @@ public class SignIn extends HttpServlet {
         String uPwd = request.getParameter("pwd");
         uPwd = b.encode(uPwd.getBytes());
         String req = "{\"iq\" : {\"mobileVersion\" : \"11.1.2\",\"namespace\" : \"LoginRequest\",\"model\" : \"1\",\"query\" : {\"deviceId\" :\"332681ded91f86841504b5cef5d4ef1fd5353bcad9e1c632b69f160aa851af72\",\"password\" : \"" + uPwd + "\",\"languageType\" : \"0\",\"mnc\" : \"00\",\"brandID\" : \"FEEP\",\"token\" : \"332681ded91f86841504b5cef5d4ef1fd5353bcad9e1c632b69f160aa851af72\",\"name\" : \"" + uName + "\"},\"resolution\" : \"750.000000X1334.000000\",\"version\" : \"6.6.15\"}}";
-//        String url = "http://oa.flyrise.cn:8089/servlet/mobileServlet?json="+ URLEncoder.encode(req,"utf-8");
-        String url = "http://10.62.20.202:8080/servlet/mobileServlet?json="+ URLEncoder.encode(req,"utf-8");
+        String url = "http://oa.flyrise.cn:8089/servlet/mobileServlet?json="+ URLEncoder.encode(req,"utf-8");
+//        String url = "http://10.62.20.202:8080/servlet/mobileServlet?json="+ URLEncoder.encode(req,"utf-8");
         URL realUrl = new URL(url);
         URLConnection conn = realUrl.openConnection();
         conn.setRequestProperty("accept", "*/*");

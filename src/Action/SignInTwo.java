@@ -18,6 +18,10 @@ import java.util.Map;
 
 @WebServlet(name = "SignInTwo", urlPatterns = "/SignInTwo")
 public class SignInTwo extends HttpServlet {
+
+    private final static String FQ = "1";
+    private final static String YQ = "2";
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -33,10 +37,16 @@ public class SignInTwo extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String uName = request.getParameter("name");
         String uPwd = request.getParameter("pwd");
+        String select = request.getParameter("selectV");
         OutputStream output = response.getOutputStream();
-        String req = "{\"iq\" : {\"namespace\" : \"LocationRequest\",\"model\" : \"0\",\"query\" : {\"latitude\" : \"22.371652\",\"longitude\" : \"113.573696\",\"name\" : \"广东飞企互联科技股份有限公司\",\"address\" : \"珠海市软件园路1号南方软件园B1栋5层\"}}}";
-//        String url = "http://oa.flyrise.cn:8089/servlet/mobileServlet?json="+ URLEncoder.encode(req,"utf-8");
-        String url = "http://10.62.20.202:8080/servlet/mobileServlet?json="+ URLEncoder.encode(req,"utf-8");
+        String req = "";
+        if (FQ.equals(select)) {
+            req = "{\"iq\" : {\"namespace\" : \"LocationRequest\",\"model\" : \"0\",\"query\" : {\"latitude\" : \"22.371652\",\"longitude\" : \"113.573696\",\"name\" : \"广东飞企互联科技股份有限公司\",\"address\" : \"珠海市软件园路1号南方软件园B1栋5层\"}}}";
+        } else if (YQ.equals(select)) {
+            req = "{\"iq\" : {\"namespace\" : \"LocationRequest\",\"model\" : \"0\",\"query\" : {\"latitude\" : \"22.370629\",\"longitude\" : \"113.572769\",\"name\" : \"珠海园圈科技有限公司\",\"address\" : \"珠海市香洲区唐家湾镇软件园路1号南方软件园B6栋1层\"}}}";
+        }
+        String url = "http://oa.flyrise.cn:8089/servlet/mobileServlet?json="+ URLEncoder.encode(req,"utf-8");
+//        String url = "http://10.62.20.202:8080/servlet/mobileServlet?json="+ URLEncoder.encode(req,"utf-8");
         URL realUrl = new URL(url);
         URLConnection conn = realUrl.openConnection();
         conn.setRequestProperty("accept", "*/*");
